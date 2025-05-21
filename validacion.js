@@ -2,13 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const formulario = document.getElementById('formularioRegistro');
-
-  const obligatorios = [
-    'nombreUsuario',
-    'contrasena',
-    'direccionPostal',
-    'telefono'
-  ];
+  const telefonoRegex = /^(?:\+?569)\d{8}$/;
+  const urlRegex = /^(?:(?:https?:\/\/)?)[\w-]+(?:\.[\w-]+)+\/?$/;
 
   function mostrarError(idCampo, mensaje) {
     const errorDiv = document.getElementById(`error-${idCampo}`);
@@ -16,59 +11,58 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function limpiarErrores() {
-    [...obligatorios, 'confirmarContrasena', 'entradaAficion', 'paginaWeb']
-      .forEach(c => mostrarError(c, ''));
-  }
-
-  function validarURL(url) {
-    try {
-      new URL(url);
-      return true;
-    } catch {
-      return false;
-    }
+    ['nombreUsuario', 'contrasena', 'confirmarContrasena', 'direccionPostal', 'telefono', 'paginaWeb', 'entradaAficion']
+      .forEach(campo => mostrarError(campo, ''));
   }
 
   formulario.addEventListener('submit', e => {
     limpiarErrores();
-
     let valido = true;
-    const data = {};
 
-
-    obligatorios.forEach(campo => {
-      const valor = document.getElementById(campo).value.trim();
-      data[campo] = valor;
-      if (!valor) {
-        mostrarError(campo, 'Este campo es obligatorio');
-        valido = false;
-      }
-    });
-
+    const nombre = document.getElementById('nombreUsuario').value.trim();
+    if (!nombre) {
+      mostrarError('nombreUsuario', 'Este campo es obligatorio');
+      valido = false;
+    }
 
     const pwd = document.getElementById('contrasena').value.trim();
+    if (!pwd) {
+      mostrarError('contrasena', 'Este campo es obligatorio');
+      valido = false;
+    }
+
     const pwdConf = document.getElementById('confirmarContrasena').value.trim();
     if (pwd && pwdConf && pwd !== pwdConf) {
       mostrarError('confirmarContrasena', 'Las contraseñas no coinciden');
       valido = false;
     }
 
+    const dir = document.getElementById('direccionPostal').value.trim();
+    if (!dir) {
+      mostrarError('direccionPostal', 'Este campo es obligatorio');
+      valido = false;
+    }
 
-    const tel = data.telefono;
-    if (tel && !/^\+?\d{8,15}$/.test(tel)) {
-      mostrarError('telefono', 'Número de teléfono inválido');
+    const tel = document.getElementById('telefono').value.trim();
+    if (!tel) {
+      mostrarError('telefono', 'Este campo es obligatorio');
+      valido = false;
+    } else if (!telefonoRegex.test(tel)) {
+      mostrarError('telefono', 'Formato inválido (debe ser 569XXXXXXXX)');
       valido = false;
     }
 
     const web = document.getElementById('paginaWeb').value.trim();
-    if (web && !validarURL(web)) {
-      mostrarError('paginaWeb', 'URL inválida');
+    if (web && !urlRegex.test(web)) {
+      mostrarError('paginaWeb', 'URL inválida. Debe ser dominio (ej: midominio.com) o con http:// o https://');
       valido = false;
     }
+
     const lista = document.getElementById('listaAficiones');
     const afs = Array.from(lista.children)
       .map(li => li.querySelector('span').textContent);
     document.getElementById('aficionesOcultas').value = afs.join(',');
+
     if (!valido) {
       e.preventDefault();
     }
