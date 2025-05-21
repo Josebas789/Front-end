@@ -1,3 +1,4 @@
+
 const botonAgregarAficion = document.getElementById('botonAgregarAficion');
 const entradaAficion = document.getElementById('entradaAficion');
 const listaAficiones = document.getElementById('listaAficiones');
