@@ -1,3 +1,5 @@
+// Manejo de la lista de aficiones
+
 const botonAgregarAficion = document.getElementById('botonAgregarAficion');
 const entradaAficion = document.getElementById('entradaAficion');
 const listaAficiones = document.getElementById('listaAficiones');
@@ -14,7 +16,7 @@ function crearItemAficion(aficion) {
   const btnEliminar = document.createElement('button');
   btnEliminar.type = 'button';
   btnEliminar.className = 'btn btn-sm btn-outline-danger';
-  btnEliminar.textContent = 'Eliminar';
+  btnEliminar.textContent = 'x';
   btnEliminar.addEventListener('click', () => li.remove());
 
   li.appendChild(span);
