@@ -11,9 +11,11 @@
 </head>
 <body>
   <div class="container mt-5">
-    <div class="card">
-      <div class="card-body">
-        <h2 class="card-title text-center mb-4">Registro de Usuario</h2>
+    <div class="card shadow-lg border-primary">
+      <div class="card-header bg-primary text-white">
+        <h2 class="text-center m-0">Registro de Usuario</h2>
+      </div>
+      <div class="card-body bg-light">
         <form id="formularioRegistro" novalidate>
           <div class="mb-3">
             <label for="nombreUsuario" class="form-label">Nombre de usuario</label>
@@ -54,20 +56,20 @@
           </div>
           <div class="mb-3">
             <label for="paginaWeb" class="form-label">Página web personal (URL)</label>
-            <input type="url" class="form-control" id="paginaWeb" name="paginaWeb" placeholder="https://">
+            <input type="url" class="form-control" id="paginaWeb" name="paginaWeb" placeholder="best.aliexpress.com">
             <div class="error-text" id="error-paginaWeb"></div>
           </div>
           <div class="mb-3">
             <label class="form-label">Aficiones / Pasatiempos</label>
             <div class="d-flex gap-2 mb-2">
               <input type="text" class="form-control" id="entradaAficion" placeholder="Escribe una afición">
-              <button type="button" class="btn btn-outline-primary" id="botonAgregarAficion">Agregar</button>
+              <button type="button" class="btn btn-outline-primary" id="botonAgregarAficion">+</button>
             </div>
             <div class="error-text" id="error-entradaAficion"></div>
             <ul class="list-group" id="listaAficiones"></ul>
             <input type="hidden" id="aficionesOcultas" name="aficiones">
           </div>
-          <button type="submit" class="btn btn-primary w-100">Registrar</button>
+          <button type="submit" class="btn btn-success w-100">Registrar</button>
         </form>
       </div>
     </div>
