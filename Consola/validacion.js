@@ -74,9 +74,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (afs.length < 2) { mostrarError('entradaAficion', 'Debes ingresar al menos dos aficiones'); valido = false; }
     document.getElementById('aficionesOcultas').value = afs.join(',');
 
-    if (!valido) {;
-    } else {;
+    if (!valido) {
+      e.preventDefault();
+    } else {
+      e.preventDefault();
       mensajeExito.classList.remove('d-none');
+
+      const usuario = {
+        nombreUsuario: nombre,
+        contrasena: pwd,
+        direccion: dir,
+        comuna: comuna,
+        telefono: tel,
+        paginaWeb: web,
+        aficiones: afs
+      };
+      console.log('Usuario registrado:', usuario);
     }
   });
 });
