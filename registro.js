@@ -1,4 +1,4 @@
-// Manejo de la lista de aficiones
+// lista de aficiones
 
 const botonAgregarAficion = document.getElementById('botonAgregarAficion');
 const entradaAficion = document.getElementById('entradaAficion');
